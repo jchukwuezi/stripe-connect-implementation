@@ -32,22 +32,12 @@ const ExpressUserSchema = new mongoose.Schema({
         required: true
     },
 
-    stripeAccountId:{
-        type: 'String',
-        required: true
-    },
-
     initiatives: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Initiative'
         }
-    ],
-
-    accountStatus : {
-        type: String,
-        default: 'Inactive'
-    }
+    ]
 })
 
 module.exports = mongoose.model('ExpressUser', ExpressUserSchema)

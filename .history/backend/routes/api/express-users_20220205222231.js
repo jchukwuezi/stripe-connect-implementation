@@ -8,10 +8,9 @@ const stripe = require('stripe')(process.env.STRIPE_API_KEY_TEST)
 
 router.post("/register", async (req, res)=> {
     //I'm taking in a name, email, password, businessType
-    console.log('Printing out the request')
-    console.log(req.body)
     const {name, email, description, businessType, password} = req.body;
-    if(!name || !email || !password || !businessType || !description){
+
+    if(!name || !email || !password || !businessType){
         return res.status(400).send('Please enter all fields')
     }
 
@@ -26,7 +25,6 @@ router.post("/register", async (req, res)=> {
                 name,
                 email, 
                 businessType,
-                description,
                 password
             })
 
@@ -36,34 +34,32 @@ router.post("/register", async (req, res)=> {
                 if(err) throw err;
                 newUser.password = hash;
                 newUser.save()
-                .then( async()=>{
-                    //res.status(200).send({successful: `${newUser.name} has been added to the database`})
+                .then(()=>{
+                    res.status(200).send({successful: `${newUser.name} has been added to the database`})
 
                     //creating express account in stripe
                     const account = await stripe.accounts.create({
                         email: newUser.email,
                         country: 'IE',
                         type: 'express',
-                        capabilities: {
+                        capabilties: {
                             card_payments: {requested: true},
                             transfers: {requested: true}
                         },
                         business_type: newUser.businessType,
-                        business_profile: {
-                            name: newUser.name,
-                            product_description: newUser.description
-                        }
-                    })
-                    .catch((err) => {
-                        console.error(err)
-                    })
+                        business_profile.
 
-                    console.log(account)
-                    res.send(account)
+                
+                    })
                 })
+
+
             }))
         }
+        
     })
-})
 
-module.exports = router;
+
+  
+    
+})

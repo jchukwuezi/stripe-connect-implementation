@@ -58,7 +58,6 @@ router.post("/register", async (req, res)=> {
                         console.error(err)
                     })
 
-                    console.log(account)
                     res.send(account)
                 })
             }))

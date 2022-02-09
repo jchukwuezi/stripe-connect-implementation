@@ -2,11 +2,10 @@ const dotenv = require('dotenv')
 const express = require('express')
 const connectDB = require('./config/db')
 const cors = require('cors')
-//const ExpressUsers = require('./routes/api/express-users')
+const ExpressUsers = require('./routes/api/express-users')
 
 //load config path
 dotenv.config({path: './config/config.env'})
-const ExpressUsers = require('./routes/api/express-users')
 
 connectDB()
 
@@ -17,7 +16,6 @@ app.use(cors({
     credentials: true,
     origin: 'http://localhost:3000' //connecting to the frontend
 }))
-app.use(express.json())
 
 app.use("/api/express-users", ExpressUsers)
 

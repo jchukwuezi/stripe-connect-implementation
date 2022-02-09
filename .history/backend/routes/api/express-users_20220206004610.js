@@ -30,16 +30,13 @@ router.post("/register", async (req, res)=> {
                 password
             })
 
-            //hasing the password
+            //hashing password
             bcrypt.genSalt((err, salt) => 
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
+            bcrypt.hash(newUser.password, salt, async (err, hash) => {
                 if(err) throw err;
                 newUser.password = hash;
-                newUser.save()
-                .then( async()=>{
-                    //res.status(200).send({successful: `${newUser.name} has been added to the database`})
-
-                    //creating express account in stripe
+                try {
+                    console.log('creating stripe connect account')
                     const account = await stripe.accounts.create({
                         email: newUser.email,
                         country: 'IE',
@@ -54,15 +51,12 @@ router.post("/register", async (req, res)=> {
                             product_description: newUser.description
                         }
                     })
-                    .catch((err) => {
-                        console.error(err)
-                    })
-
-                    console.log(account)
-                    res.send(account)
-                })
+                    await newUser.save()
+                } catch (error) {
+                    console.log(error)
+                }
             }))
-        }
+        }      
     })
 })
 

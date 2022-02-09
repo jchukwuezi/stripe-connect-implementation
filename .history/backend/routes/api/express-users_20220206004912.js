@@ -37,14 +37,14 @@ router.post("/register", async (req, res)=> {
                 newUser.password = hash;
                 newUser.save()
                 .then( async()=>{
-                    //res.status(200).send({successful: `${newUser.name} has been added to the database`})
-
+                    res.status(200).send({successful: `${newUser.name} has been added to the database`})
+                    
                     //creating express account in stripe
                     const account = await stripe.accounts.create({
                         email: newUser.email,
                         country: 'IE',
                         type: 'express',
-                        capabilities: {
+                        capabilties: {
                             card_payments: {requested: true},
                             transfers: {requested: true}
                         },
@@ -54,12 +54,6 @@ router.post("/register", async (req, res)=> {
                             product_description: newUser.description
                         }
                     })
-                    .catch((err) => {
-                        console.error(err)
-                    })
-
-                    console.log(account)
-                    res.send(account)
                 })
             }))
         }
