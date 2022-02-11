@@ -67,14 +67,7 @@ router.post("/register", async (req, res)=> {
 
 router.post("/login", (req, res)=>{
     console.log(req.body)
-    const {email, password} = req.body;
-    ExpressUser.findOne({email: email}).then((user) => {
-        if(!user){
-            return res.status(404).send({error: 'User not found'})
-        }
-
-        
-    })
+    
 })
 
 module.exports = router;
