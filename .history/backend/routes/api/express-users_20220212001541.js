@@ -65,37 +65,31 @@ router.post("/register", async (req, res)=> {
     })
 })
 
-router.post("/login" , async (req, res) => {
-    //for the first login status will be changed and account link will be created
-    const {email, password} = req.body;
+router.post("/login", (req, res)=>{
     console.log(req.body)
-
-    ExpressUser.findOne({email}).then((user) => {
+    const {email, password} = req.body;
+    ExpressUser.findOne({email: email}).then((user) => {
         if(!user){
-            return res.status(400).send('User was not found')
+            return res.status(404).send({error: 'User not found'})
         }
 
-        //if the user is found
-        bcrypt.compare(password, user.password)
-        .then(async (isMatch) => {
-            if(!isMatch) {
+        bcrypt.compare(password, user.password).then(async (isMatch) => {
+            if(!isMatch){
                 return res.status(400).send('Invalid credentials')
             }
 
-            //if user is found create account link to redirect user to
+            //authenticating stripe account
             const accountLink = await stripe.accountLinks.create({
                 account: user.stripeAccountId,
-                refresh_url: 'http://localhost:3000/failure' ,
-                return_url: 'http://localhost:3000/success' ,
-                type: 'account_onboarding' 
+                refresh_url: "http://localhost:3000/failure",
+                return_url: "http:://localhost:3000/success",
+                type: 'account_onboarding'
             })
-
-            console.log(accountLink)
-            console.log("account link : " +  accountLink.url)
+            
             res.send(accountLink.url)
         })
+
     })
 })
-
 
 module.exports = router;

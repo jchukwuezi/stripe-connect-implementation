@@ -29,7 +29,7 @@ export const Login = () =>{
             }
             console.log(res)
             const getUrl = async() => {
-                const data = await res.text()
+                const data = await res.json()
                 console.log(data)
                 setUrl(data)
             }

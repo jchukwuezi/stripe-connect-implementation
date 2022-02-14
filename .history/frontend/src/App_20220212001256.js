@@ -4,7 +4,7 @@ import {Route, Routes} from 'react-router-dom'
 import {SignUp} from '../src/components/SignUp'
 import {Login} from '../src/components/Login'
 import {SuccessOnBoard} from '../src/components/SuccessOnboard'
-import {FailureOnBoard} from '../src/components/FailureOnBoard'
+import {FailureOnboard} from '../src/components/FailureOnboard'
 
 
 function App() {

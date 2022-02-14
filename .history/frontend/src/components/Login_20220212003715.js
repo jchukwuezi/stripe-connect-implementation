@@ -6,7 +6,6 @@ export const Login = () =>{
     const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [url, setUrl] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,14 +26,8 @@ export const Login = () =>{
                 } 
                 errorCheck()
             }
-            console.log(res)
-            const getUrl = async() => {
-                const data = await res.text()
-                console.log(data)
-                setUrl(data)
-            }
-            getUrl()
-            navigate(url)
+
+            navigate(await res.text())
         })
     }
 
@@ -52,10 +45,6 @@ export const Login = () =>{
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="text" placeholder="Enter email" onChange={e=> setPassword(e.target.value)} />
                         </Form.Group>
-
-                        <Button className="mt-5" type="submit">
-                            Submit              
-                        </Button>
                     
                     </Form>
                 </Col>

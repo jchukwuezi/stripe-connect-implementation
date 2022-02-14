@@ -29,8 +29,7 @@ export const Login = () =>{
             }
             console.log(res)
             const getUrl = async() => {
-                const data = await res.text()
-                console.log(data)
+                const data = await res.json()
                 setUrl(data)
             }
             getUrl()
@@ -52,10 +51,6 @@ export const Login = () =>{
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="text" placeholder="Enter email" onChange={e=> setPassword(e.target.value)} />
                         </Form.Group>
-
-                        <Button className="mt-5" type="submit">
-                            Submit              
-                        </Button>
                     
                     </Form>
                 </Col>

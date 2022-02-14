@@ -77,14 +77,14 @@ router.post("/login" , async (req, res) => {
 
         //if the user is found
         bcrypt.compare(password, user.password)
-        .then(async (isMatch) => {
+        .then((isMatch) => {
             if(!isMatch) {
                 return res.status(400).send('Invalid credentials')
             }
 
             //if user is found create account link to redirect user to
             const accountLink = await stripe.accountLinks.create({
-                account: user.stripeAccountId,
+                account: user.accountId,
                 refresh_url: 'http://localhost:3000/failure' ,
                 return_url: 'http://localhost:3000/success' ,
                 type: 'account_onboarding' 
@@ -93,6 +93,7 @@ router.post("/login" , async (req, res) => {
             console.log(accountLink)
             console.log("account link : " +  accountLink.url)
             res.send(accountLink.url)
+
         })
     })
 })
