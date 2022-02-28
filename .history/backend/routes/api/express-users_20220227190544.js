@@ -97,27 +97,13 @@ router.post("/login" , async (req, res) => {
     })
 })
 
-router.post("/create-charge", async (req, res) => {
+router.post("/create-product", async (req, res) => {
+    const product = await stripe.products.create({
+        name: 'Basic Dashboard',
+        stripeAccount: 'acct_1KStnnQv2cmEv0G1'
 
-    const paymentMethod = await stripe.paymentMethods.create({
-        type: 'card',
-        card: {
-            number: '4242424242424242',
-            exp_month: 2,
-            exp_year: 2023,
-            cvc: '314',
-        }
     });
-
-    const paymentIntent = await stripe.paymentIntents.create({
-        payment_method: paymentMethod,
-        payment_method_types: ['card'],
-        amount: 1500,
-        currency: 'eur',
-        on_behalf_of: 'acct_'
-    });
-
-    res.send(paymentIntent)
+    res.send(product)
 })
 
 

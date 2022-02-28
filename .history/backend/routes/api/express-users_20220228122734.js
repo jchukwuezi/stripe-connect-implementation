@@ -114,7 +114,7 @@ router.post("/create-charge", async (req, res) => {
         payment_method_types: ['card'],
         amount: 1500,
         currency: 'eur',
-        on_behalf_of: 'acct_'
+        on_behalf_of: 'acct_1KStnnQv2cmEv0G1'
     });
 
     res.send(paymentIntent)

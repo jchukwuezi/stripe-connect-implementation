@@ -110,11 +110,11 @@ router.post("/create-charge", async (req, res) => {
     });
 
     const paymentIntent = await stripe.paymentIntents.create({
-        payment_method: paymentMethod,
         payment_method_types: ['card'],
+        payment_method: paymentMethod,
         amount: 1500,
         currency: 'eur',
-        on_behalf_of: 'acct_'
+        on_behalf_of: 'acct_1KStnnQv2cmEv0G1'
     });
 
     res.send(paymentIntent)
