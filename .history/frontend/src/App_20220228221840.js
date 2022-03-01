@@ -5,7 +5,6 @@ import {SignUp} from '../src/components/SignUp'
 import {Login} from '../src/components/Login'
 import {SuccessOnBoard} from '../src/components/SuccessOnboard'
 import {FailureOnBoard} from '../src/components/FailureOnBoard'
-import {PaymentForm} from '../src/components/PaymentForm'
 
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
         <Route path = "/login" element={<Login/>}/>
         <Route path = "/success" element={<SuccessOnBoard/>}/>
         <Route path = "/failure" element={<FailureOnBoard/>}/>
-        <Route path = "/payment" element={<PaymentForm/>}/>
       </Routes>
     </div>
 
