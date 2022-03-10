@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {Container, Row, Form, Alert, Col, InputGroup, Button} from 'react-bootstrap'
+import {CardElement} from '@stripe/react-stripe-js'
 export const PaymentForm  =() =>{
 
     const [cardNumber, setCardNumber] = useState("")
@@ -32,6 +33,11 @@ export const PaymentForm  =() =>{
                     <Form.Group>
                         <Form.Label>Card Number</Form.Label>
                         <Form.Control type="text" placeholder="Valid Card Number" onChange={e=> setCardNumber(e.target.value)}/>
+                    </Form.Group>
+
+                    <Form.Group>
+                        <Form.Label>Card</Form.Label>
+                        <CardElement id="card-element" />
                     </Form.Group>
 
                     <Col className='sm-8'>

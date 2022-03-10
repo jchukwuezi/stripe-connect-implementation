@@ -126,11 +126,11 @@ router.post("/create-payment-intent", async(req, res) => {
     try{
         const paymentIntent = await stripe.paymentIntents.create({
             payment_method_types: ['card'],
-            amount: 1798,
+            amount: 1586,
             currency: 'eur',
-            on_behalf_of: 'acct_',
+            //on_behalf_of: 'acct_1KStnnQv2cmEv0G1'
             transfer_data:{
-                destination: 'acct_'
+                destination: 'acct_1KStnnQv2cmEv0G1'
             }
         });
         console.log(paymentIntent.client_secret)

@@ -7,10 +7,7 @@ import {SuccessOnBoard} from '../src/components/SuccessOnboard'
 import {FailureOnBoard} from '../src/components/FailureOnBoard'
 import {PaymentForm} from '../src/components/PaymentForm'
 import {Checkout} from '../src/components/Checkout'
-import {Elements} from '@stripe/react-stripe-js'
-import {loadStripe} from '@stripe/stripe-js'
 
-const stripePromise = loadStripe("pk_test_")
 
 function App() {
   return (
@@ -21,11 +18,7 @@ function App() {
         <Route path = "/success" element={<SuccessOnBoard/>}/>
         <Route path = "/failure" element={<FailureOnBoard/>}/>
         <Route path = "/payment" element={<PaymentForm/>}/>
-        <Route path = "/checkout" element={
-            <Elements stripe={stripePromise}>
-              <Checkout/>
-            </Elements>
-      }/>
+        <Route path = "/checkout" element={<Checkout/>}/>
       </Routes>
     </div>
 

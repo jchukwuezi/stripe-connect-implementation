@@ -8,20 +8,16 @@ export const PaymentForm  =() =>{
     const [CVC, setCVC] = useState("")
     
 
-    const handleSubmit = async (e) =>{
+    const handleSubmit = (e) =>{
         e.preventDefault()
         console.log("Button was clicked")
-        if(!cardNumber || !expiryMonth || !expiryYear || !CVC){
-            console.log("All details were not filled")
+        const paymentData = {
+            cardNumber,
+            expiryMonth,
+            expiryYear,
+            CVC
         }
-
-        //creating payment intent on the server side
-        const {clientSecret} = await fetch("http://localhost:7777/api/express-users/create-payment-intent", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            
-        })
-        
+        console.log(paymentData)
     }
 
     return(
